@@ -1,0 +1,45 @@
+name: Update Player Data
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+env:
+  SERVER_URL: ${{ secrets.SERVER_URL }}
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v4
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: fetch data.json from data branch
+        run: |
+          git fetch origin data
+          git checkout origin/data -- data.json
+
+      - name: execute py script
+        run: |
+          python main.py
+          
+      - name: save new player data
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git checkout data
+          git add data.json
+          git commit -m "Update data.json" || echo "No changes to commit"
+          git push origin data
