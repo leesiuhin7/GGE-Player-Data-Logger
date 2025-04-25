@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .div-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        body {background-color: #303030;}
+        h2 {color: #cccccc;}
+        label {color: #cccccc;}
+        input {background-color: #eeeeee;}
+        table, th, td {
+            color: #cccccc;
+            border: 1px solid #666666;
+            border-collapse: collapse;
+        }
+        th {align-content: center;}
+    </style>
+    <head>
+        <title>GGE Player Data Logger</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2 style="text-align: center;">Filtering</h2>
+        <table id="filtering-table" style="position: relative; left: 5%; width: 90%;">
+            <tr>
+                <th style="width: 25%;">OID</th>
+                <th style="width: 25%;">Time</th>
+                <th style="width: 25%;">Name</th>
+                <th style="width: 25%;">Alliance</th>
+            </tr>
+            <tr>
+                <th>
+                    <div>
+                        <label>
+                            <input type="checkbox" id="OID-filter-enable">
+                            Enable Filter
+                        </label>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <label>
+                            <input type="checkbox" id="time-filter-enable">
+                            Enable Filter
+                        </label>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <label>
+                            <input type="checkbox" id="name-filter-enable">
+                            Enable Filter
+                        </label>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <label>
+                            <input type="checkbox" id="AN-filter-enable">
+                            Enable Filter
+                        </label>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <div class="div-column">
+                        <input type="text" id="OID-filter" placeholder="OID Filter Value">
+                    </div>
+                </th>
+                <th>
+                    <div class="div-column">
+                        <label>
+                            From:
+                            <input type="date" id="time-filter-from">
+                            00:00:00
+                        </label>
+                        <label>
+                            To:
+                            <input type="date" id="time-filter-to">
+                            00:00:00
+                        </label>
+                    </div>
+                </th>
+                <th>
+                    <div class="div-column">
+                        <input type="text" id="name-filter" placeholder="Name Filter Value">
+                    </div>
+                </th>
+                <th>
+                    <div class="div-column">
+                        <input type="text" id="AN-filter" placeholder="Alliance Filter Value">
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="4">
+                    <button type="button" onclick="applyFilters()">Apply Filters</button>
+                </th>
+            </tr>
+        </table>
+
+        <h2 style="text-align: center;">Sorting</h2>
+        <table id="sorting-table" style="position: relative; left: 5%; width: 90%;">
+            <tr>
+                <th style="width: 25%;">OID</th>
+                <th style="width: 25%;">Time</th>
+                <th style="width: 25%;">Name</th>
+                <th style="width: 25%;">Alliance</th>
+            </tr>
+            <tr>
+                <th>
+                    <div class="div-column">
+                        <label>
+                            <input type="radio" name="OID-sort-priority" value="0">
+                            Sorting Priority: 1
+                        </label>
+                        <label>
+                            <input type="radio" name="OID-sort-priority" value="1">
+                            Sorting Priority: 2
+                        </label>
+                        <label>
+                            <input type="radio" name="OID-sort-priority" value="2">
+                            Sorting Priority: 3
+                        </label>
+                        <label>
+                            <input type="radio" name="OID-sort-priority" value="3" checked>
+                            Sorting Priority: 4
+                        </label>
+                        <label>
+                            <input type="checkbox" id="OID-sort-reverse">
+                            Reverse (Largest to Smallest)
+                        </label>
+                    </div>
+                </th>
+                <th>
+                    <div class="div-column">
+                        <label>
+                            <input type="radio" name="time-sort-priority" value="0">
+                            Sorting Priority: 1
+                        </label>
+                        <label>
+                            <input type="radio" name="time-sort-priority" value="1">
+                            Sorting Priority: 2
+                        </label>
+                        <label>
+                            <input type="radio" name="time-sort-priority" value="2">
+                            Sorting Priority: 3
+                        </label>
+                        <label>
+                            <input type="radio" name="time-sort-priority" value="3" checked>
+                            Sorting Priority: 4
+                        </label>
+                        <label>
+                            <input type="checkbox" id="time-sort-reverse">
+                            Reverse (Latest to Oldest)
+                        </label>
+                    </div>
+                </th>
+                <th>
+                    <div class="div-column">
+                        <label>
+                            <input type="radio" name="name-sort-priority" value="0">
+                            Sorting Priority: 1
+                        </label>
+                        <label>
+                            <input type="radio" name="name-sort-priority" value="1">
+                            Sorting Priority: 2
+                        </label>
+                        <label>
+                            <input type="radio" name="name-sort-priority" value="2">
+                            Sorting Priority: 3
+                        </label>
+                        <label>
+                            <input type="radio" name="name-sort-priority" value="3" checked>
+                            Sorting Priority: 4
+                        </label>
+                        <label>
+                            <input type="checkbox" id="name-sort-reverse">
+                            Reverse (Z to A)
+                        </label>
+                    </div>
+                </th>
+                <th>
+                    <div class="div-column">
+                        <label>
+                            <input type="radio" name="AN-sort-priority" value="0">
+                            Sorting Priority: 1
+                        </label>
+                        <label>
+                            <input type="radio" name="AN-sort-priority" value="1">
+                            Sorting Priority: 2
+                        </label>
+                        <label>
+                            <input type="radio" name="AN-sort-priority" value="2">
+                            Sorting Priority: 3
+                        </label>
+                        <label>
+                            <input type="radio" name="AN-sort-priority" value="3" checked>
+                            Sorting Priority: 4
+                        </label>
+                        <label>
+                            <input type="checkbox" id="AN-sort-reverse">
+                            Reverse (Z to A)
+                        </label>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="4">
+                    <button type="button" onclick="applySorting()">Apply Sorting</button>
+                </th>
+            </tr>
+        </table>
+
+        <div style="text-align: center; padding-top: 10px;">
+            <button type="button" onclick="applyFilters(); applySorting()">
+                Apply Filters + Sorting
+            </button>
+        </div>
+
+        <h2 style="text-align: center;">Search Results</h2>
+        <table id="result-table" style="position: relative; left: 5%; width: 90%;">
+            <tr>
+                <th>OID</th>
+                <th>Time</th>
+                <th>Name</th>
+                <th>Alliance</th>
+            </tr>
+        </table>
+        <script src="main.js"></script>
+        <script src="query.js"></script>
+    </body>
+</html>
