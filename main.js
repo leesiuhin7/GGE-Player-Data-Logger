@@ -90,17 +90,28 @@ function applyFilters() {
     if (timeCheckbox.checked) {
         const fromDateInput = document.getElementById("time-filter-from")
         const toDateInput = document.getElementById("time-filter-to")
-        const fromTime = localtimeToUTC(fromDateInput.valueAsDate) / 1000
-        const toTime = localtimeToUTC(toDateInput.valueAsDate) / 1000
-        filterFuncs[1] = (t) => fromTime <= t && t < toTime
+        const fromTime = fromDateInput.valueAsDate
+        const toTime = toDateInput.valueAsDate
+        
+        let fromTimeFunc = (t) => true
+        let toTimeFunc = (t) => true
+        if (fromTime !== null) {
+            const fromTimeUTC = localtimeToUTC(fromDateInput.valueAsDate) / 1000
+            fromTimeFunc = (t) => fromTimeUTC <= t
+        }
+        if (toTime !== null) {
+            const toTimeUTC = localtimeToUTC(toDateInput.valueAsDate) / 1000
+            toTimeFunc = (t) => t < toTimeUTC
+        }
+        filterFuncs[1] = (t) => fromTimeFunc(t) && toTimeFunc(t)
     }
     if (nameCheckbox.checked) {
         const nameFilterValue = document.getElementById("name-filter").value
-        filterFuncs[2] = (n) => n === nameFilterValue
+        filterFuncs[2] = (n) => nameFilterValue.localeCompare(n, undefined, { sensitivity: "base" }) === 0
     }
     if (ANCheckbox.checked) {
         const ANFilterValue = document.getElementById("AN-filter").value
-        filterFuncs[3] = (an) => an === ANFilterValue
+        filterFuncs[3] = (an) => ANFilterValue.localeCompare(an, undefined, { sensitivity: "base" }) === 0
     }
 
     const result = filterData(playerData, filterFuncs)
