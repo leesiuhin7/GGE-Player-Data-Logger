@@ -1,0 +1,126 @@
+/*---------------------------------------/*
+ # SETTINGS
+/*---------------------------------------*/
+/*---------------------------------------/*
+ # GENERIC - BOOTSTRAP
+/*---------------------------------------*/
+body {
+  background-color: #303030;
+  color: #ffffff;
+}
+
+.navbar-brand {
+  color: #ffffff;
+  font-size: 30px;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 3px;
+}
+.navbar-brand:hover,
+.navbar-brand :focus {
+  color: #ffffff;
+}
+
+.nav-link {
+  color: #ffffff;
+}
+.nav-link:hover {
+  color: red;
+}
+.nav-link:focus {
+  color: #ffffff;
+}
+
+.active {
+  color: red !important;
+}
+
+.card {
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: #303030;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.75);
+}
+
+/*---------------------------------------/*
+ # ELEMENTS
+/*---------------------------------------*/
+/*---------------------------------------/*
+ # OBJECTS
+/*---------------------------------------*/
+/*---------------------------------------/*
+ # COMPONENTS
+/*---------------------------------------*/
+.c-button__red {
+  color: red !important;
+}
+
+/*---------------------------------------/*
+ # UTILITIES
+/*---------------------------------------*/
+.div-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  color: #cccccc;
+}
+
+label {
+  color: #cccccc;
+}
+
+input {
+  background-color: #eeeeee;
+}
+
+table,
+th,
+td {
+  color: #cccccc;
+  border: 1px solid #666666;
+  border-collapse: collapse;
+}
+
+th {
+  align-content: center;
+}
+
+body {
+  font-family: "DM Sans", Arial, sans-serif;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.pt-10 {
+  padding-top: 10px;
+}
+
+.main-table {
+  position: relative;
+  left: 5%;
+  width: 90%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+.main-table th,
+.main-table td {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.col-25 {
+  width: 25%;
+}
+
+.div-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
